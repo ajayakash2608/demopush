@@ -7,7 +7,7 @@ function TodoForm({ addTodo, initialTodo = {}, isEditing = false, updateTodo }) 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const todo = { taskName, description, status };
+    const todo = { taskName, description, status, _id: initialTodo._id };
     if (isEditing) {
       updateTodo({ ...initialTodo, taskName, description, status });
     } else {
