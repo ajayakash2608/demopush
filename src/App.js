@@ -1,68 +1,38 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-
-import './App.css';
+import React, { useState } from 'react';
 import TodoForm from './Components/TodoForm';
 import TodoList from './Components/TodoList';
-
-const API_URL = 'http://localhost:5000/todos';  
+import './App.css';
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState('all');
 
-  const fetchTodos = useCallback(async () => {
-    try {
-      const response = await axios.get(API_URL, {
-        params: filter === 'all' ? {} : { status: filter }
-      });
-      setTodos(response.data);
-    } catch (err) {
-      console.error('Error fetching todos:', err);
-    }
-  }, [filter]);
-
-  useEffect(() => {
-    fetchTodos();
-  }, [fetchTodos]);
-
-  const addTodo = async (todo) => {
-    try {
-      const response = await axios.post(API_URL, todo);
-      setTodos([...todos, response.data]);
-    } catch (err) {
-      console.error('Error adding todo:', err);
-    }
+  const addTodo = (todo) => {
+    setTodos([...todos, { ...todo, _id: Date.now() }]);
   };
 
-  const updateTodo = async (updatedTodo) => {
-    try {
-      const response = await axios.put(`${API_URL}/${updatedTodo._id}`, updatedTodo);
-      setTodos(todos.map(todo => (todo._id === updatedTodo._id ? response.data : todo)));
-    } catch (err) {
-      console.error('Error updating todo:', err);
-    }
+  const updateTodo = (updatedTodo) => {
+    setTodos(todos.map(todo => (todo._id === updatedTodo._id ? updatedTodo : todo)));
   };
 
-  const deleteTodo = async (id) => {
-    try {
-      await axios.delete(`${API_URL}/${id}`);
-      setTodos(todos.filter(todo => todo._id !== id));
-    } catch (err) {
-      console.error('Error deleting todo:', err);
-    }
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo._id !== id));
   };
+
+  const filteredTodos = todos.filter(todo => 
+    filter === 'all' ? true : todo.status === filter
+  );
 
   return (
     <div className="App">
       <h1>Todo App</h1>
       <TodoForm addTodo={addTodo} />
       <div className="filter-buttons">
-        <button className="filter-all" onClick={() => setFilter('all')}>All</button>
-        <button className="filter-completed" onClick={() => setFilter('completed')}>Completed</button>
-        <button className="filter-not-completed" onClick={() => setFilter('not completed')}>Pending</button>
+        <button onClick={() => setFilter('all')}>All</button>
+        <button onClick={() => setFilter('completed')}>Completed</button>
+        <button onClick={() => setFilter('not completed')}>Pending</button>
       </div>
-      <TodoList todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+      <TodoList todos={filteredTodos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
     </div>
   );
 }
