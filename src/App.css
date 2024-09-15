@@ -1,0 +1,138 @@
+.App {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+button.add-task {
+  background-color: #ffa500;
+  color: white;
+}
+
+button.add-task:hover {
+  background-color: #e69500;
+}
+
+button.edit-task {
+  background-color: #007bff;
+  color: white;
+}
+
+button.edit-task:hover {
+  background-color: #0056b3;
+}
+
+button.delete-task {
+  background-color: #e67606;
+  color: white;
+}
+
+button.delete-task:hover {
+  background-color: #e65550;
+}
+
+select.status-completed {
+  background-color: #4CAF50;
+  color: white;
+}
+
+select.status-not-completed {
+  background-color: #ff6961;
+  color: white;
+}
+
+button.filter-all {
+  background-color: #6c757d;
+  color: white;
+  margin-bottom: 8%;
+}
+
+button.filter-all:hover {
+  background-color: #5a6268;
+}
+
+button.filter-completed {
+  background-color: #28a745;
+  color: white;
+}
+
+button.filter-completed:hover {
+  background-color: #218838;
+}
+
+button.filter-not-completed {
+  background-color: #dc3545;
+  color: white;
+}
+
+button.filter-not-completed:hover {
+  background-color: #c82333;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.todo-item {
+  background-color: white;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.todo-item h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.todo-item p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.todo-item button {
+  margin-top: 10px;
+}
+
+.todo-item select {
+  margin-top: 10px;
+}
+
+select.status-completed, 
+select.status-not-completed {
+  font-size: 0.8em;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  width: 150px;
+}
+
+select.status-not-completed {
+  background-color: #ff6961;
+}
