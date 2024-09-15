@@ -46,4 +46,4 @@ function TodoItem({ todo, updateTodo, deleteTodo }) {
   );
 }
 
-export default TodoItem
+export default TodoItem;
